@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 
 import datetime
 import os
@@ -195,91 +195,91 @@ class MainWindow(tkinter.Tk):
         self.PA.bind('<<ComboboxSelected>>', self.callback)
 
         # Frequência Cardíaca
-        ttk.Label(self.mainframe, text='Frequência\nCardíaca: ').grid(row=6, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Frequência\nCardíaca: ').grid(row=5, column=4, sticky=tkinter.W)
         self.fc = tkinter.StringVar()
         self.FREQ = ttk.Combobox(self.mainframe, textvariable=self.fc)
-        self.FREQ.grid(row=6, column=2, sticky=tkinter.W)
+        self.FREQ.grid(row=5, column=5, sticky=tkinter.W)
         self.FREQ['values'] = tuple(self.fc_score.keys())
         self.fc.set(self.FREQ['values'][3])
         self.FREQ.bind('<<ComboboxSelected>>', self.callback)
 
         # Frequência Respiratória
-        ttk.Label(self.mainframe, text='Frequência\nRespiratória: ').grid(row=7, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Frequência\nRespiratória: ').grid(row=6, column=1, sticky=tkinter.W)
         self.fr = tkinter.StringVar()
         self.FR = ttk.Combobox(self.mainframe, textvariable=self.fr)
-        self.FR.grid(row=7, column=2, sticky=tkinter.W)
+        self.FR.grid(row=6, column=2, sticky=tkinter.W)
         self.FR['values'] = tuple(self.fr_score.keys())
         self.fr.set(self.FR['values'][3])
         self.FR.bind('<<ComboboxSelected>>', self.callback)
 
         # PA02
-        ttk.Label(self.mainframe, text='A-aPO2(FiO2>50%)\nou PaO2(FiO2<50%):').grid(row=8, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='A-aPO2(FiO2>50%)\nou PaO2(FiO2<50%):').grid(row=6, column=4, sticky=tkinter.W)
         self.pao2 = tkinter.StringVar()
         self.PAO2 = ttk.Combobox(self.mainframe, textvariable=self.pao2)
-        self.PAO2.grid(row=8, column=2, sticky=tkinter.W)
+        self.PAO2.grid(row=6, column=5, sticky=tkinter.W)
         self.PAO2['values'] = tuple(self.pao2_score.keys())
         self.pao2.set(self.PAO2['values'][3])
         self.PAO2.bind('<<ComboboxSelected>>', self.callback)
 
         # PH arterial ou HCO3
-        ttk.Label(self.mainframe, text='PH arterial\nou HCO3: ').grid(row=9, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='PH arterial\nou HCO3: ').grid(row=7, column=1, sticky=tkinter.W)
         self.ph = tkinter.StringVar()
         self.PH = ttk.Combobox(self.mainframe, textvariable=self.ph)
-        self.PH.grid(row=9, column=2, sticky=tkinter.W)
+        self.PH.grid(row=7, column=2, sticky=tkinter.W)
         self.PH['values'] = tuple(self.ph_score.keys())
         self.ph.set(self.PH['values'][3])
         self.PH.bind('<<ComboboxSelected>>', self.callback)
 
         # Na sérico
-        ttk.Label(self.mainframe, text='Na+ sérico\n(meq/L): ').grid(row=10, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Na+ sérico\n(meq/L): ').grid(row=7, column=4, sticky=tkinter.W)
         self.na = tkinter.StringVar()
         self.NA = ttk.Combobox(self.mainframe, textvariable=self.na)
-        self.NA.grid(row=10, column=2, sticky=tkinter.W)
+        self.NA.grid(row=7, column=5, sticky=tkinter.W)
         self.NA['values'] = tuple(self.na_score.keys())
         self.na.set(self.NA['values'][3])
         self.NA.bind('<<ComboboxSelected>>', self.callback)
 
         # K sérico
-        ttk.Label(self.mainframe, text='K+ sérico\n(meq/L): ').grid(row=11, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='K+ sérico\n(meq/L): ').grid(row=8, column=1, sticky=tkinter.W)
         self.k = tkinter.StringVar()
         self.K = ttk.Combobox(self.mainframe, textvariable=self.k)
-        self.K.grid(row=11, column=2, sticky=tkinter.W)
+        self.K.grid(row=8, column=2, sticky=tkinter.W)
         self.K['values'] = tuple(self.k_score.keys())
         self.k.set(self.K['values'][3])
         self.K.bind('<<ComboboxSelected>>', self.callback)
 
         # Creatinina
-        ttk.Label(self.mainframe, text='Cr sérica\n(meq/L): ').grid(row=12, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Cr sérica\n(meq/L): ').grid(row=8, column=4, sticky=tkinter.W)
         self.cr = tkinter.StringVar()
         self.CR = ttk.Combobox(self.mainframe, textvariable=self.cr)
-        self.CR.grid(row=12, column=2, sticky=tkinter.W)
+        self.CR.grid(row=8, column=5, sticky=tkinter.W)
         self.CR['values'] = tuple(self.cr_score.keys())
         self.cr.set(self.CR['values'][1])
         self.CR.bind('<<ComboboxSelected>>', self.callback)
 
         # Hematócrito
-        ttk.Label(self.mainframe, text='Hematócrito (%): ').grid(row=13, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Hematócrito (%): ').grid(row=9, column=1, sticky=tkinter.W)
         self.ht = tkinter.StringVar()
         self.HT = ttk.Combobox(self.mainframe, textvariable=self.ht)
-        self.HT.grid(row=13, column=2, sticky=tkinter.W)
+        self.HT.grid(row=9, column=2, sticky=tkinter.W)
         self.HT['values'] = tuple(self.ht_score.keys())
         self.ht.set(self.HT['values'][2])
         self.HT.bind('<<ComboboxSelected>>', self.callback)
 
         # Leucócitos
-        ttk.Label(self.mainframe, text='Leucócitos(10^3/£gl): ').grid(row=14, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Leucócitos(10^3/£gl): ').grid(row=9, column=4, sticky=tkinter.W)
         self.leuc = tkinter.StringVar()
         self.LEUC = ttk.Combobox(self.mainframe, textvariable=self.leuc)
-        self.LEUC.grid(row=14, column=2, sticky=tkinter.W)
+        self.LEUC.grid(row=9, column=5, sticky=tkinter.W)
         self.LEUC['values'] = tuple(self.leuc_score.keys())
         self.leuc.set(self.LEUC['values'][2])
         self.LEUC.bind('<<ComboboxSelected>>', self.callback)
 
         # Glasgow
-        ttk.Label(self.mainframe, text='Escala de coma\nde Glasgow: ').grid(row=15, column=1, sticky=tkinter.W)
+        ttk.Label(self.mainframe, text='Escala de coma\nde Glasgow: ').grid(row=10, column=1, sticky=tkinter.W)
         self.glasgow = tkinter.StringVar()
         self.GLASGOW = ttk.Combobox(self.mainframe, textvariable=self.glasgow)
-        self.GLASGOW.grid(row=15, column=2, sticky=tkinter.W)
+        self.GLASGOW.grid(row=10, column=2, sticky=tkinter.W)
         self.GLASGOW['values'] = tuple(range(3, 16))
         self.glasgow.set(self.GLASGOW['values'][-1])
         self.GLASGOW.bind('<<ComboboxSelected>>', self.callback)
@@ -289,10 +289,10 @@ class MainWindow(tkinter.Tk):
                   2) ICC classe IV da NYHA
                   3) DPOC grave: Hipercapnia,O2 Dependente, Hipertensão Pulmonar
                   4) Diálise Crônica
-                  5) Imunocomprometido''').grid(row=16, column=2, sticky=tkinter.W)
+                  5) Imunocomprometido''').grid(row=11, column=2, sticky=tkinter.W)
         self.cronico = tkinter.StringVar()
         self.cronframe = tkinter.Frame(self.mainframe)
-        self.cronframe.grid(row=17, column=1, columnspan=10, sticky=tkinter.EW)
+        self.cronframe.grid(row=12, column=1, columnspan=10, sticky=tkinter.EW)
 
         self.nenhuma = ttk.Radiobutton(self.cronframe, text='Nenhuma',
                                        variable=self.cronico, value='0', command=self.callback)
