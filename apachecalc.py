@@ -408,7 +408,8 @@ class MainWindow(tkinter.Tk):
         w.event_generate("<<Cut>>")
 
     def sobre(self, *ignore):
-        messagebox.showinfo(message='Calculadora Score Apache-II versão 0.10', title='Sobre')
+        messagebox.showinfo(message='Calculadora Score Apache-II versão 0.10'
+                                    'Fernando B. Giannasi® - Ago/2015', title='Sobre')
 
     def mortalidade(self, *ignore):
         messagebox.showinfo(message='0-4 pontos: 4% não op/ 1% pós-op\n' +
