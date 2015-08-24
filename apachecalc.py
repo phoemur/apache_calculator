@@ -453,12 +453,14 @@ class MainWindow(tkinter.Tk):
         reply = messagebox.askyesno('Novo',
                                     'Deseja salvar alterações para o paciente {0}?'.format(self.nome.get()), parent=self)
         nome = self.nome.get()
-        if not nome:
+        if not reply:
+            self.blank()
+        elif reply and len(nome) == 0:
             messagebox.showwarning(title='Atenção', message='É obrigatório preencher o nome')
             return
-        if reply and len(nome) > 0:
+        else:
             self.salvar(self)
-        self.blank()
+            self.blank()
 
     def salvar(self, *ignore):
         nome = self.nome.get()
