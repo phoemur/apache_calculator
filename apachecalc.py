@@ -55,6 +55,8 @@ class MainWindow(tkinter.Tk):
         self.icon = tkinter.PhotoImage(file=os.path.join(os.path.dirname(__file__), "images", "bookmark.gif"))
         self.images_keepmem.append(self.icon)
         self.tk.call('wm', 'iconphoto', self._w, self.icon)
+        self.style = ttk.Style()
+        self.style.map('TCombobox', fieldbackground=[('readonly', 'white')])
 
         # Menus
         menubar = tkinter.Menu(self)
@@ -410,7 +412,7 @@ class MainWindow(tkinter.Tk):
     def recortar(self, *ignore):
         w = self.focus_get()
         w.event_generate("<<Cut>>")
-        
+
     def selecionar_tudo(self, *ignore):
         w = self.focus_get()
         try:
