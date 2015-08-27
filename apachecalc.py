@@ -82,10 +82,12 @@ class MainWindow(tkinter.Tk):
         for label, command, shortcut_text, shortcut in (
                 ("Copiar", self.copiar, "Ctrl+C", "<Control-c>"),
                 ("Colar", self.colar, "Ctrl+V", "<Control-v>"),
-                ("Recortar", self.recortar, "Ctrl+X", "<Control-x>")):
+                ("Recortar", self.recortar, "Ctrl+X", "<Control-x>"),
+                ("Selecionar Tudo", self.selecionar_tudo, "Ctrl+A", "<Control-a>")):
             menuEditar.add_command(label=label, underline=0 if label != "Colar" else 1,
                                    command=command, accelerator=shortcut_text)
             # self.bind(shortcut, command)
+        self.bind("<Control-a>", self.selecionar_tudo)
         menuEditar.add_separator()
         menuEditar.add_command(label="Importar XML", underline=0, command=self.importar_db)
         menuEditar.add_command(label="Exportar XML", underline=0, command=self.exportar_db)
@@ -107,6 +109,8 @@ class MainWindow(tkinter.Tk):
         self.MENUmouse.add_command(label="Copiar")
         self.MENUmouse.add_command(label="Colar")
         self.MENUmouse.add_command(label="Recortar")
+        self.MENUmouse.add_separator()
+        self.MENUmouse.add_command(label="Selecionar Tudo")
         self.bind("<Button-3><ButtonRelease-3>", self.show_mouse_menu)
 
         # Toolbar
@@ -162,7 +166,7 @@ class MainWindow(tkinter.Tk):
         self.idade = tkinter.StringVar()
         ttk.Entry(self.ageframe, width=4, textvariable=self.dia_nasc).grid(row=1, column=2, sticky=tkinter.E)
         ttk.Label(self.ageframe, text='/').grid(row=1, column=3, sticky=tkinter.EW)
-        self.mes = ttk.Combobox(self.ageframe, textvariable=self.mes_nasc)
+        self.mes = ttk.Combobox(self.ageframe, textvariable=self.mes_nasc, state='readonly')
         self.mes.grid(row=1, column=4, sticky=tkinter.EW)
         ttk.Label(self.ageframe, text='/').grid(row=1, column=5, sticky=tkinter.EW)
         ttk.Entry(self.ageframe, width=6, textvariable=self.ano_nasc).grid(row=1, column=6, sticky=tkinter.W)
@@ -179,7 +183,7 @@ class MainWindow(tkinter.Tk):
         # Temperatura
         ttk.Label(self.mainframe, text='Temperatura (°C): ').grid(row=4, column=1, sticky=tkinter.W)
         self.temperatura = tkinter.StringVar()
-        self.temp = ttk.Combobox(self.mainframe, textvariable=self.temperatura)
+        self.temp = ttk.Combobox(self.mainframe, textvariable=self.temperatura, state='readonly')
         self.temp.grid(row=4, column=2, sticky=tkinter.W)
         self.temp['values'] = tuple(self.temp_score.keys())
         self.temperatura.set(self.temp['values'][4])
@@ -188,7 +192,7 @@ class MainWindow(tkinter.Tk):
         # Pressão Arterial Média
         ttk.Label(self.mainframe, text='Pressão Arterial\nMédia (mmHg): ').grid(row=5, column=1, sticky=tkinter.W)
         self.pam = tkinter.StringVar()
-        self.PA = ttk.Combobox(self.mainframe, textvariable=self.pam)
+        self.PA = ttk.Combobox(self.mainframe, textvariable=self.pam, state='readonly')
         self.PA.grid(row=5, column=2, sticky=tkinter.W)
         self.PA['values'] = tuple(self.pa_score.keys())
         self.pam.set(self.PA['values'][2])
@@ -197,7 +201,7 @@ class MainWindow(tkinter.Tk):
         # Frequência Cardíaca
         ttk.Label(self.mainframe, text='Frequência\nCardíaca: ').grid(row=5, column=4, sticky=tkinter.W)
         self.fc = tkinter.StringVar()
-        self.FREQ = ttk.Combobox(self.mainframe, textvariable=self.fc)
+        self.FREQ = ttk.Combobox(self.mainframe, textvariable=self.fc, state='readonly')
         self.FREQ.grid(row=5, column=5, sticky=tkinter.W)
         self.FREQ['values'] = tuple(self.fc_score.keys())
         self.fc.set(self.FREQ['values'][3])
@@ -206,7 +210,7 @@ class MainWindow(tkinter.Tk):
         # Frequência Respiratória
         ttk.Label(self.mainframe, text='Frequência\nRespiratória: ').grid(row=6, column=1, sticky=tkinter.W)
         self.fr = tkinter.StringVar()
-        self.FR = ttk.Combobox(self.mainframe, textvariable=self.fr)
+        self.FR = ttk.Combobox(self.mainframe, textvariable=self.fr, state='readonly')
         self.FR.grid(row=6, column=2, sticky=tkinter.W)
         self.FR['values'] = tuple(self.fr_score.keys())
         self.fr.set(self.FR['values'][3])
@@ -215,7 +219,7 @@ class MainWindow(tkinter.Tk):
         # PA02
         ttk.Label(self.mainframe, text='A-aPO2(FiO2>50%)\nou PaO2(FiO2<50%):').grid(row=6, column=4, sticky=tkinter.W)
         self.pao2 = tkinter.StringVar()
-        self.PAO2 = ttk.Combobox(self.mainframe, textvariable=self.pao2)
+        self.PAO2 = ttk.Combobox(self.mainframe, textvariable=self.pao2, state='readonly')
         self.PAO2.grid(row=6, column=5, sticky=tkinter.W)
         self.PAO2['values'] = tuple(self.pao2_score.keys())
         self.pao2.set(self.PAO2['values'][3])
@@ -224,7 +228,7 @@ class MainWindow(tkinter.Tk):
         # PH arterial ou HCO3
         ttk.Label(self.mainframe, text='PH arterial\nou HCO3: ').grid(row=7, column=1, sticky=tkinter.W)
         self.ph = tkinter.StringVar()
-        self.PH = ttk.Combobox(self.mainframe, textvariable=self.ph)
+        self.PH = ttk.Combobox(self.mainframe, textvariable=self.ph, state='readonly')
         self.PH.grid(row=7, column=2, sticky=tkinter.W)
         self.PH['values'] = tuple(self.ph_score.keys())
         self.ph.set(self.PH['values'][3])
@@ -233,7 +237,7 @@ class MainWindow(tkinter.Tk):
         # Na sérico
         ttk.Label(self.mainframe, text='Na+ sérico\n(meq/L): ').grid(row=7, column=4, sticky=tkinter.W)
         self.na = tkinter.StringVar()
-        self.NA = ttk.Combobox(self.mainframe, textvariable=self.na)
+        self.NA = ttk.Combobox(self.mainframe, textvariable=self.na, state='readonly')
         self.NA.grid(row=7, column=5, sticky=tkinter.W)
         self.NA['values'] = tuple(self.na_score.keys())
         self.na.set(self.NA['values'][3])
@@ -242,7 +246,7 @@ class MainWindow(tkinter.Tk):
         # K sérico
         ttk.Label(self.mainframe, text='K+ sérico\n(meq/L): ').grid(row=8, column=1, sticky=tkinter.W)
         self.k = tkinter.StringVar()
-        self.K = ttk.Combobox(self.mainframe, textvariable=self.k)
+        self.K = ttk.Combobox(self.mainframe, textvariable=self.k, state='readonly')
         self.K.grid(row=8, column=2, sticky=tkinter.W)
         self.K['values'] = tuple(self.k_score.keys())
         self.k.set(self.K['values'][3])
@@ -251,7 +255,7 @@ class MainWindow(tkinter.Tk):
         # Creatinina
         ttk.Label(self.mainframe, text='Cr sérica\n(meq/L): ').grid(row=8, column=4, sticky=tkinter.W)
         self.cr = tkinter.StringVar()
-        self.CR = ttk.Combobox(self.mainframe, textvariable=self.cr)
+        self.CR = ttk.Combobox(self.mainframe, textvariable=self.cr, state='readonly')
         self.CR.grid(row=8, column=5, sticky=tkinter.W)
         self.CR['values'] = tuple(self.cr_score.keys())
         self.cr.set(self.CR['values'][1])
@@ -260,7 +264,7 @@ class MainWindow(tkinter.Tk):
         # Hematócrito
         ttk.Label(self.mainframe, text='Hematócrito (%): ').grid(row=9, column=1, sticky=tkinter.W)
         self.ht = tkinter.StringVar()
-        self.HT = ttk.Combobox(self.mainframe, textvariable=self.ht)
+        self.HT = ttk.Combobox(self.mainframe, textvariable=self.ht, state='readonly')
         self.HT.grid(row=9, column=2, sticky=tkinter.W)
         self.HT['values'] = tuple(self.ht_score.keys())
         self.ht.set(self.HT['values'][2])
@@ -269,7 +273,7 @@ class MainWindow(tkinter.Tk):
         # Leucócitos
         ttk.Label(self.mainframe, text='Leucócitos(10^3/£gl): ').grid(row=9, column=4, sticky=tkinter.W)
         self.leuc = tkinter.StringVar()
-        self.LEUC = ttk.Combobox(self.mainframe, textvariable=self.leuc)
+        self.LEUC = ttk.Combobox(self.mainframe, textvariable=self.leuc, state='readonly')
         self.LEUC.grid(row=9, column=5, sticky=tkinter.W)
         self.LEUC['values'] = tuple(self.leuc_score.keys())
         self.leuc.set(self.LEUC['values'][2])
@@ -278,7 +282,7 @@ class MainWindow(tkinter.Tk):
         # Glasgow
         ttk.Label(self.mainframe, text='Escala de coma\nde Glasgow: ').grid(row=10, column=1, sticky=tkinter.W)
         self.glasgow = tkinter.StringVar()
-        self.GLASGOW = ttk.Combobox(self.mainframe, textvariable=self.glasgow)
+        self.GLASGOW = ttk.Combobox(self.mainframe, textvariable=self.glasgow, state='readonly')
         self.GLASGOW.grid(row=10, column=2, sticky=tkinter.W)
         self.GLASGOW['values'] = tuple(range(3, 16))
         self.glasgow.set(self.GLASGOW['values'][-1])
@@ -406,6 +410,13 @@ class MainWindow(tkinter.Tk):
     def recortar(self, *ignore):
         w = self.focus_get()
         w.event_generate("<<Cut>>")
+        
+    def selecionar_tudo(self, *ignore):
+        w = self.focus_get()
+        try:
+            w.selection_range(0, tkinter.END)
+        except AttributeError:
+            pass
 
     def sobre(self, *ignore):
         messagebox.showinfo(message='Calculadora Score Apache-II versão 0.10\n'
@@ -590,9 +601,10 @@ class MainWindow(tkinter.Tk):
 
     def show_mouse_menu(self, e):
         w = e.widget
-        self.MENUmouse.entryconfigure("Copiar", command=lambda: w.event_generate("<<Copy>>"))
-        self.MENUmouse.entryconfigure("Colar", command=lambda: w.event_generate("<<Paste>>"))
-        self.MENUmouse.entryconfigure("Recortar", command=lambda: w.event_generate("<<Cut>>"))
+        self.MENUmouse.entryconfigure("Copiar", command=self.copiar)
+        self.MENUmouse.entryconfigure("Colar", command=self.colar)
+        self.MENUmouse.entryconfigure("Recortar", command=self.recortar)
+        self.MENUmouse.entryconfigure("Selecionar Tudo", command=self.selecionar_tudo)
         self.MENUmouse.tk.call("tk_popup", self.MENUmouse, e.x_root, e.y_root)
 
     def callback(self, *ignore):
